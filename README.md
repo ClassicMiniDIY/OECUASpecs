@@ -109,6 +109,7 @@ OECUASpecs/
 | rusEFI | [rusefi-mlg](adapters/rusefi/rusefi-mlg.adapter.yaml) | Binary | Ready |
 | AiM | [aim-xrk](adapters/aim/aim-xrk.adapter.yaml) | Binary | Ready |
 | Link | [link-llg](adapters/link/link-llg.adapter.yaml) | Binary | Ready |
+| Emerald | [emerald-lg](adapters/emerald/emerald-lg.adapter.yaml) | Binary | Ready |
 | MoTeC | motec-csv | CSV | Planned |
 | AEM | aem-csv | CSV | Planned |
 | Holley | holley-csv | CSV | Planned |
