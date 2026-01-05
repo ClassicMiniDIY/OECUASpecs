@@ -45,6 +45,43 @@
       "format": "uri",
       "description": "URL for more information"
     },
+    "branding": {
+      "type": "object",
+      "description": "Vendor branding assets (optional but recommended)",
+      "properties": {
+        "logo": {
+          "type": "string",
+          "description": "Path to full logo image (relative to assets/logos/). Recommended: SVG or PNG, min 400px wide",
+          "pattern": "^[a-z0-9-]+\\.(svg|png|jpg|gif)$",
+          "examples": ["haltech-logo.svg", "link-logo.png"]
+        },
+        "icon": {
+          "type": "string",
+          "description": "Path to square icon (relative to assets/icons/). Recommended: SVG or PNG, 128x128 or 256x256",
+          "pattern": "^[a-z0-9-]+\\.(svg|png|jpg|gif)$",
+          "examples": ["haltech-icon.svg", "link-icon.png"]
+        },
+        "banner": {
+          "type": "string",
+          "description": "Path to banner image (relative to assets/banners/). Recommended: PNG, 1200x630 for social sharing",
+          "pattern": "^[a-z0-9-]+\\.(svg|png|jpg)$",
+          "examples": ["haltech-banner.png"]
+        },
+        "color_primary": {
+          "type": "string",
+          "description": "Primary brand color in hex format",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "examples": ["#E31937", "#0066CC"]
+        },
+        "color_secondary": {
+          "type": "string",
+          "description": "Secondary brand color in hex format",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "examples": ["#1A1A1A", "#FFFFFF"]
+        }
+      },
+      "additionalProperties": false
+    },
     "file_format": {
       "type": "object",
       "description": "File format specification",

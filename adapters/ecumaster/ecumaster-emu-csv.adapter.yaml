@@ -16,6 +16,13 @@ description: |
   - Sparse data with empty cells (previous value should be held)
 website: "https://www.ecumaster.com"
 
+branding:
+  logo: ecumaster-logo.svg
+  icon: ecumaster-icon.svg
+  banner: ecumaster-banner.png
+  color_primary: "#8D7507"
+  color_secondary: "#020202"
+
 file_format:
   type: csv
   extensions: [".csv", ".log"]

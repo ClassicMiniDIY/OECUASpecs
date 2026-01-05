@@ -18,6 +18,13 @@ description: |
   - Timestamp wraps at 65535ms (~65.5 seconds)
 website: "https://speeduino.com"
 
+branding:
+  logo: speeduino-logo.png
+  icon: speeduino-icon.png
+  banner: speeduino-banner.png
+  color_primary: "#3498DB"
+  color_secondary: "#2C3E50"
+
 file_format:
   type: binary
   extensions: [".mlg"]

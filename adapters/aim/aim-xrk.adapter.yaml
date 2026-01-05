@@ -19,6 +19,13 @@ description: |
   - Typical sample rate: 100Hz
 website: "https://www.aim-sportline.com"
 
+branding:
+  logo: aim-logo.png
+  icon: aim-icon.png
+  banner: aim-banner.png
+  color_primary: "#E31937"
+  color_secondary: "#1A1A1A"
+
 file_format:
   type: binary
   extensions: [".xrk", ".drk"]

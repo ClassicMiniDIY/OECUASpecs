@@ -6,6 +6,7 @@ Thank you for your interest in contributing to the OpenECU Alliance! This docume
 
 - [Ways to Contribute](#ways-to-contribute)
 - [Contributing Adapters](#contributing-adapters)
+- [Contributing Brand Assets](#contributing-brand-assets)
 - [Proposing Specification Changes](#proposing-specification-changes)
 - [Reporting Issues](#reporting-issues)
 - [Development Setup](#development-setup)
@@ -177,6 +178,145 @@ source_names:
   - "Engine RPM"
   - "Eng RPM"  # Found in firmware v2.3 exports
 ```
+
+## Contributing Brand Assets
+
+Help make the OpenECU Alliance visually cohesive by contributing vendor logos, icons, and brand assets.
+
+### Asset Directory Structure
+
+```text
+assets/
+├── logos/      # Full vendor logos (horizontal/primary)
+├── icons/      # Square icons (for favicons, app icons, thumbnails)
+├── banners/    # Banner images (for social sharing, headers)
+└── README.md   # Detailed specifications
+```
+
+### Asset Requirements
+
+| Asset Type | Format                 | Size           | Background     | Naming                |
+|------------|------------------------|----------------|----------------|-----------------------|
+| **Logo**   | SVG (preferred) or PNG | Min 400px wide | Transparent    | `{vendor}-logo.svg`   |
+| **Icon**   | SVG (preferred) or PNG | 256x256px      | Transparent    | `{vendor}-icon.svg`   |
+| **Banner** | PNG or JPG             | 1200x630px     | Solid/gradient | `{vendor}-banner.png` |
+
+### Acceptable Sources
+
+**Approved sources:**
+
+- Official vendor press kits / media pages
+- Direct written permission from vendor
+- Assets you have verified rights to use
+
+**Not acceptable:**
+
+- Screenshots or low-quality captures
+- Modified third-party images
+- Assets without clear licensing
+
+### Contributing Brand Assets Guide
+
+#### 1. Find Official Assets
+
+Check vendor websites for:
+
+- Media/Press pages
+- Brand guidelines PDFs
+- Download sections
+
+Many vendors offer official logos at URLs like:
+
+- `vendor.com/media`
+- `vendor.com/press`
+- `vendor.com/brand`
+
+#### 2. Prepare Assets
+
+Ensure files meet the specifications:
+
+```bash
+# Check image dimensions (using ImageMagick)
+identify assets/logos/haltech-logo.svg
+
+# Optimize PNG files
+optipng -o5 assets/icons/haltech-icon.png
+```
+
+#### 3. Add to Repository
+
+```bash
+# Copy files to appropriate directories
+cp ~/Downloads/haltech-logo.svg assets/logos/
+cp ~/Downloads/haltech-icon.png assets/icons/
+
+# Ensure lowercase naming
+mv assets/logos/Haltech-Logo.svg assets/logos/haltech-logo.svg
+```
+
+#### 4. Update the Adapter
+
+Add branding reference to the adapter YAML:
+
+```yaml
+website: "https://www.haltech.com"
+
+branding:
+  logo: haltech-logo.svg
+  icon: haltech-icon.svg
+  banner: haltech-banner.png
+  color_primary: "#FFBE1A"
+  color_secondary: "#1A1A1A"
+
+file_format:
+  # ...
+```
+
+#### 5. Document Source
+
+Include in your PR description:
+
+- Where you obtained the assets
+- Link to vendor media page or permission
+- Any license terms that apply
+
+#### 6. Submit Pull Request
+
+```bash
+git checkout -b add-vendorname-branding
+git add assets/logos/ assets/icons/ assets/banners/
+git add adapters/vendorname/
+git commit -m "branding: add assets for VendorName"
+git push origin add-vendorname-branding
+```
+
+### Finding Brand Colors
+
+Extract primary brand colors from vendor assets:
+
+1. **From Logo**: Use a color picker on the dominant logo color
+2. **From Website**: Inspect CSS for brand colors
+3. **From Guidelines**: Many vendors publish hex codes in brand guides
+
+Common tools:
+
+- Browser DevTools (inspect element)
+- [ColorZilla](https://www.colorzilla.com/) browser extension
+- [Coolors](https://coolors.co/) image color extractor
+
+### Asset Checklist
+
+Before submitting brand assets:
+
+- [ ] Files are from an official/approved source
+- [ ] File names are lowercase with hyphens
+- [ ] Logo is at least 400px wide (or scalable SVG)
+- [ ] Icon is square (1:1 aspect ratio)
+- [ ] Banner is 1200x630px for Open Graph compatibility
+- [ ] Backgrounds are transparent (except banners)
+- [ ] Color codes are valid 6-digit hex values
+- [ ] Adapter YAML is updated with branding section
+- [ ] PR description includes asset source
 
 ## Proposing Specification Changes
 

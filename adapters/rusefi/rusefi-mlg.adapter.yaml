@@ -19,6 +19,13 @@ description: |
   - Timestamp wraps at 65535ms (~65.5 seconds)
 website: "https://rusefi.com"
 
+branding:
+  logo: rusefi-logo.png
+  icon: rusefi-icon.png
+  banner: rusefi-banner.png
+  color_primary: "#B7410E"
+  color_secondary: "#2C2C2C"
+
 file_format:
   type: binary
   extensions: [".mlg"]

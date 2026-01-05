@@ -136,6 +136,31 @@ URL for more information about this ECU or format.
 website: "https://www.haltech.com"
 ```
 
+#### `branding` (optional)
+
+Vendor branding assets for display in applications. All paths are relative to the `assets/` directory in the OECUASpecs repository.
+
+```yaml
+branding:
+  logo: haltech-logo.svg           # Full logo (assets/logos/)
+  icon: haltech-icon.svg           # Square icon (assets/icons/)
+  banner: haltech-banner.png       # Social banner (assets/banners/)
+  color_primary: "#FFBE1A"         # Primary brand color
+  color_secondary: "#1A1A1A"       # Secondary brand color
+```
+
+| Field | Description | Requirements |
+|-------|-------------|--------------|
+| `logo` | Full vendor logo | SVG or PNG, min 400px wide, transparent background |
+| `icon` | Square icon | SVG or PNG, 256x256px, transparent background |
+| `banner` | Banner image | PNG/JPG, 1200x630px (Open Graph standard) |
+| `color_primary` | Primary brand color | Hex format (#RRGGBB) |
+| `color_secondary` | Secondary brand color | Hex format (#RRGGBB) |
+
+**File Naming Convention**: `{vendor}-{type}.{ext}` (e.g., `haltech-logo.svg`, `link-icon.png`)
+
+**Asset Sources**: Assets should come from official vendor press kits, media pages, or with explicit permission. See [assets/README.md](assets/README.md) for contribution guidelines.
+
 ## 4. File Format Specification
 
 The `file_format` object describes how to parse the log file.
