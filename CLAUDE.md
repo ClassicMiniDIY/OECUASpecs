@@ -8,7 +8,9 @@ This is the **single source of truth** for OpenECU Alliance adapter specificatio
 
 1. **Adapter Definitions** - YAML files that describe ECU log file formats
 2. **JSON Schema** - Validation schema for adapter files
-3. **Specification Documents** - The formal OpenECU Alliance specification
+3. **Brand Assets** - Logos and icons for ECU vendors
+
+Full documentation is available at: [openecualliance.org/docs](https://www.openecualliance.org/docs)
 
 Applications (like UltraLog, the OpenECU Alliance marketplace, etc.) consume adapters from this repository.
 
@@ -27,8 +29,8 @@ OECUASpecs/
 │       └── [adapter-id].adapter.yaml
 ├── schema/
 │   └── adapter.schema.json      # JSON Schema for validation
+├── assets/                      # Brand assets (logos, icons)
 ├── README.md                    # Public-facing documentation
-├── SPECIFICATION.md             # Formal specification document
 └── CLAUDE.md                    # This file
 ```
 
@@ -236,7 +238,7 @@ mkdir -p adapters/newvendor
 # 2. Create first adapter
 touch adapters/newvendor/newvendor-format.adapter.yaml
 
-# 3. Use template structure from SPECIFICATION.md
+# 3. Use template structure from https://www.openecualliance.org/spec
 ```
 
 ### Update an existing adapter
