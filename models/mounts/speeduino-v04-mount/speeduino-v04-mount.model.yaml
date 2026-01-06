@@ -1,0 +1,208 @@
+# OpenECU Alliance 3D Model Definition
+# Speeduino v0.4 ECU Mount
+#
+# A universal mounting bracket for the Speeduino v0.4 ECU board,
+# designed for firewall or bulkhead mounting in engine bays.
+
+openecualliance: "1.0"
+type: model
+
+id: speeduino-v04-mount
+name: "Speeduino v0.4 Universal ECU Mount"
+version: "1.0.0"
+vendor: speeduino
+description: |
+  A robust mounting bracket designed specifically for the Speeduino v0.4 ECU board.
+  Features integrated vibration isolation mounting points and cable management slots.
+
+  This mount elevates the ECU 15mm off the mounting surface to allow for airflow
+  underneath and protects the board from direct contact with the firewall.
+
+  Suitable for firewall, bulkhead, or under-dash mounting in any vehicle.
+
+category: mounts
+
+branding:
+  logo: speeduino-logo.png
+  icon: speeduino-icon.png
+  color_primary: "#2196F3"
+  color_secondary: "#1565C0"
+
+compatibility:
+  ecus:
+    - vendor: speeduino
+      models:
+        - "Speeduino v0.4"
+        - "Speeduino v0.4.3"
+        - "Speeduino v0.4.4"
+    - vendor: rusefi
+      models:
+        - "rusEFI Proteus" # Similar footprint
+  vehicles: []
+  notes: |
+    Compatible with any Speeduino v0.4.x board variant. The mounting hole pattern
+    matches the standard 100mm x 80mm Speeduino board dimensions.
+
+    May also fit other ECU boards with similar dimensions - measure before printing.
+
+files:
+  - filename: speeduino-v04-mount.stl
+    format: stl
+    description: "Print-ready mesh file"
+    primary: true
+
+  - filename: speeduino-v04-mount.step
+    format: step
+    description: "CAD source file for modifications in Fusion 360, SolidWorks, etc."
+
+  - filename: speeduino-v04-mount-reinforced.stl
+    format: stl
+    description: "Reinforced version with thicker walls for high-vibration applications"
+    variant: reinforced
+
+  - filename: speeduino-v04-mount.3mf
+    format: 3mf
+    description: "3MF with PrusaSlicer settings embedded"
+
+images:
+  - filename: render-front.jpg
+    type: render
+    description: "Front view 3D render showing mounting holes"
+    primary: true
+
+  - filename: render-iso.jpg
+    type: render
+    description: "Isometric view showing overall design"
+
+  - filename: installed-miata.jpg
+    type: photo
+    description: "Installed in a Mazda Miata engine bay"
+
+  - filename: dimensions.png
+    type: diagram
+    description: "Dimensional drawing with all measurements in mm"
+
+printing:
+  recommended_material: "PETG"
+  alternative_materials:
+    - "ASA"
+    - "ABS"
+    - "PA-CF (Carbon Fiber Nylon)"
+  not_recommended_materials:
+    - "PLA"
+    - "PLA+"
+  layer_height: 0.2
+  infill_percent: 40
+  infill_pattern: "gyroid"
+  wall_count: 4
+  supports_required: false
+  support_type: none
+  orientation: "Flat side (mounting surface) facing down"
+  bed_adhesion: "brim"
+  estimated_time_hours: 3.5
+  estimated_filament_grams: 65
+  nozzle_size: 0.4
+  bed_temp_celsius: 70
+  hotend_temp_celsius: 240
+  notes: |
+    IMPORTANT: Do NOT use PLA - it will warp and deform in engine bay temperatures!
+
+    Printing recommendations:
+    - PETG is the best balance of cost, printability, and heat resistance
+    - ASA is preferred if you have an enclosed printer (better UV and heat resistance)
+    - For high-performance or competition use, consider PA-CF for maximum strength
+
+    Print settings:
+    - 4 perimeters minimum for screw-hole strength
+    - 40% gyroid infill provides good all-around strength
+    - Print with flat side down - no supports needed
+    - Use a brim for bed adhesion, especially with PETG
+
+    Post-processing:
+    - Remove any stringing from cable management slots
+    - Test-fit M4 bolts before installation
+    - Consider using brass heat-set inserts for repeated mounting/removal
+
+hardware:
+  - item: "M4 x 10mm Socket Head Cap Screw"
+    quantity: 4
+    notes: "For mounting ECU board to bracket"
+
+  - item: "M4 Nylon Washer"
+    quantity: 4
+    notes: "Protects PCB bottom from screw pressure"
+
+  - item: "M6 x 20mm Flanged Hex Bolt"
+    quantity: 4
+    notes: "For mounting bracket to firewall/bulkhead"
+
+  - item: "M6 Flanged Nut"
+    quantity: 4
+    notes: "For blind mounting locations"
+
+  - item: "M4 Brass Heat-Set Insert (optional)"
+    quantity: 4
+    optional: true
+    notes: "For repeated mounting/removal without thread wear"
+
+  - item: "6mm Rubber Vibration Isolator (optional)"
+    quantity: 4
+    optional: true
+    notes: "Recommended for street vehicles to reduce vibration"
+
+assembly:
+  difficulty: easy
+  estimated_time_minutes: 15
+  tools_required:
+    - "3mm Allen key / hex driver"
+    - "5mm Allen key / hex driver"
+    - "Drill with 6.5mm bit (for firewall mounting)"
+    - "Soldering iron (if using heat-set inserts)"
+  steps:
+    - "If using heat-set inserts, install them now using a soldering iron at 250°C"
+    - "Position the bracket on your mounting surface and mark the 4 mounting holes"
+    - "Drill 6.5mm holes at marked positions (or use existing holes)"
+    - "Mount the bracket using M6 bolts with optional vibration isolators"
+    - "Place nylon washers on M4 screws, then secure the ECU board to the bracket"
+    - "Route wiring harness through the cable management slots"
+    - "Double-check all fasteners are secure before starting the engine"
+  warnings:
+    - "Ensure adequate cooling airflow around ECU - do not mount in enclosed spaces"
+    - "Route wiring away from exhaust and hot engine components"
+    - "Do not over-torque M4 screws - the PCB can crack"
+    - "Verify bracket cannot contact any moving parts (throttle linkage, etc.)"
+    - "Check clearance when hood/bonnet is closed"
+
+metadata:
+  author: "OpenECU Alliance Community"
+  license: "CC-BY-SA-4.0"
+  source_url: "https://github.com/openecualliance/OECUASpecs"
+  repository: "https://github.com/openecualliance/OECUASpecs"
+  remix_of: null
+  remixes_allowed: true
+  commercial_use_allowed: false
+  changelog:
+    - version: "1.0.0"
+      date: "2025-01-06"
+      changes:
+        - "Initial release"
+        - "Includes standard and reinforced variants"
+        - "Added cable management slots"
+        - "Compatible with v0.4.x boards"
+
+# Speeduino-specific extensions
+x_speeduino:
+  board_dimensions_mm:
+    length: 100
+    width: 80
+    height: 25
+  mounting_hole_pattern:
+    - x: 5
+      y: 5
+    - x: 95
+      y: 5
+    - x: 5
+      y: 75
+    - x: 95
+      y: 75
+  connector_clearance_mm: 40

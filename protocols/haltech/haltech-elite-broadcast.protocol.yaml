@@ -1,0 +1,732 @@
+# OpenECU Alliance Protocol Definition
+# Haltech Elite Series CAN Broadcast Protocol
+#
+# This protocol defines the CAN broadcast messages transmitted by Haltech Elite
+# series ECUs. The base CAN ID is configurable in the ECU software.
+
+openecualliance: "1.0"
+type: protocol
+
+id: haltech-elite-broadcast
+name: "Haltech Elite CAN Broadcast"
+version: "1.0.0"
+vendor: haltech
+description: |
+  CAN broadcast protocol for Haltech Elite series ECUs including Elite 550, 750,
+  950, 1500, 2000, and 2500. This protocol outputs real-time engine data at
+  configurable intervals for integration with data loggers, dashboards, and
+  other CAN-enabled devices.
+
+  The base CAN ID is configurable in the ECU software (default 0x360). All
+  message IDs are offsets from this base ID.
+
+website: "https://support.haltech.com/portal/en/kb/articles/haltech-can-ecu-broadcast-protocol"
+
+branding:
+  logo: haltech-logo.svg
+  icon: haltech-icon.svg
+  color_primary: "#FFBE1A"
+  color_secondary: "#1A1A1A"
+
+protocol:
+  type: can
+  baudrate: 1000000
+  extended_id: false
+  base_id: 0x360
+  base_id_configurable: true
+  base_id_range:
+    min: 0x000
+    max: 0x7F0
+
+messages:
+  # Message 0x360 (Base + 0) - Engine RPM and MAP
+  - id: 0x360
+    name: "Engine Data 1"
+    description: "Engine speed and manifold pressure"
+    length: 8
+    interval_ms: 10
+    transmitter: ECU
+    signals:
+      - name: "RPM"
+        description: "Engine rotational speed"
+        start_bit: 0
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 1.0
+        offset: 0
+        unit: "rpm"
+        min: 0
+        max: 20000
+
+      - name: "Manifold_Pressure"
+        description: "Manifold absolute pressure"
+        start_bit: 16
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 0.1
+        offset: 0
+        unit: "kPa"
+        min: 0
+        max: 600
+
+      - name: "Throttle_Position"
+        description: "Main throttle position sensor"
+        start_bit: 32
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 0.1
+        offset: 0
+        unit: "%"
+        min: 0
+        max: 100
+
+      - name: "Coolant_Pressure"
+        description: "Engine coolant pressure (if configured)"
+        start_bit: 48
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 0.1
+        offset: 0
+        unit: "kPa"
+        min: 0
+        max: 1000
+
+  # Message 0x361 (Base + 1) - Fuel and Air
+  - id: 0x361
+    name: "Engine Data 2"
+    description: "Fuel pressure and air/fuel ratio"
+    length: 8
+    interval_ms: 10
+    transmitter: ECU
+    signals:
+      - name: "Fuel_Pressure"
+        description: "Fuel rail pressure"
+        start_bit: 0
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 0.1
+        offset: 0
+        unit: "kPa"
+        min: 0
+        max: 1000
+
+      - name: "Oil_Pressure"
+        description: "Engine oil pressure"
+        start_bit: 16
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 0.1
+        offset: 0
+        unit: "kPa"
+        min: 0
+        max: 1500
+
+      - name: "AFR_1"
+        description: "Air/fuel ratio bank 1"
+        start_bit: 32
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 0.001
+        offset: 0
+        unit: "AFR"
+        min: 7
+        max: 25
+
+      - name: "AFR_2"
+        description: "Air/fuel ratio bank 2"
+        start_bit: 48
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 0.001
+        offset: 0
+        unit: "AFR"
+        min: 7
+        max: 25
+
+  # Message 0x362 (Base + 2) - Temperatures
+  - id: 0x362
+    name: "Temperature Data"
+    description: "Engine and intake temperatures"
+    length: 8
+    interval_ms: 50
+    transmitter: ECU
+    signals:
+      - name: "Coolant_Temp"
+        description: "Engine coolant temperature"
+        start_bit: 0
+        length: 16
+        byte_order: little_endian
+        data_type: signed
+        scale: 0.1
+        offset: 0
+        unit: "celsius"
+        min: -40
+        max: 200
+
+      - name: "Intake_Air_Temp"
+        description: "Intake air temperature"
+        start_bit: 16
+        length: 16
+        byte_order: little_endian
+        data_type: signed
+        scale: 0.1
+        offset: 0
+        unit: "celsius"
+        min: -40
+        max: 120
+
+      - name: "Fuel_Temp"
+        description: "Fuel temperature"
+        start_bit: 32
+        length: 16
+        byte_order: little_endian
+        data_type: signed
+        scale: 0.1
+        offset: 0
+        unit: "celsius"
+        min: -40
+        max: 120
+
+      - name: "Oil_Temp"
+        description: "Engine oil temperature"
+        start_bit: 48
+        length: 16
+        byte_order: little_endian
+        data_type: signed
+        scale: 0.1
+        offset: 0
+        unit: "celsius"
+        min: -40
+        max: 200
+
+  # Message 0x363 (Base + 3) - Ignition and Injection
+  - id: 0x363
+    name: "Ignition and Injection"
+    description: "Spark timing and injector duty cycle"
+    length: 8
+    interval_ms: 10
+    transmitter: ECU
+    signals:
+      - name: "Ignition_Angle"
+        description: "Ignition timing advance"
+        start_bit: 0
+        length: 16
+        byte_order: little_endian
+        data_type: signed
+        scale: 0.1
+        offset: 0
+        unit: "deg"
+        min: -20
+        max: 60
+
+      - name: "Dwell"
+        description: "Ignition coil dwell time"
+        start_bit: 16
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 0.01
+        offset: 0
+        unit: "ms"
+        min: 0
+        max: 20
+
+      - name: "Injector_Duty"
+        description: "Injector duty cycle"
+        start_bit: 32
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 0.1
+        offset: 0
+        unit: "%"
+        min: 0
+        max: 100
+
+      - name: "Injector_Pulse_Width"
+        description: "Injector pulse width"
+        start_bit: 48
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 0.001
+        offset: 0
+        unit: "ms"
+        min: 0
+        max: 65
+
+  # Message 0x364 (Base + 4) - Speed and Position
+  - id: 0x364
+    name: "Speed and Position"
+    description: "Vehicle speed and gear position"
+    length: 8
+    interval_ms: 20
+    transmitter: ECU
+    signals:
+      - name: "Vehicle_Speed"
+        description: "Vehicle ground speed"
+        start_bit: 0
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 0.1
+        offset: 0
+        unit: "km/h"
+        min: 0
+        max: 400
+
+      - name: "Gear"
+        description: "Current gear position"
+        start_bit: 16
+        length: 8
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 1.0
+        offset: 0
+        unit: ""
+        min: 0
+        max: 8
+        enum_ref: "GearPosition"
+
+      - name: "Launch_Control_State"
+        description: "Launch control system state"
+        start_bit: 24
+        length: 8
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 1.0
+        offset: 0
+        unit: ""
+        enum_ref: "LaunchControlState"
+
+      - name: "Battery_Voltage"
+        description: "System battery voltage"
+        start_bit: 32
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 0.01
+        offset: 0
+        unit: "V"
+        min: 0
+        max: 20
+
+      - name: "Target_Boost"
+        description: "Target boost pressure"
+        start_bit: 48
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 0.1
+        offset: 0
+        unit: "kPa"
+        min: 0
+        max: 500
+
+  # Message 0x365 (Base + 5) - Knock Control
+  - id: 0x365
+    name: "Knock Control"
+    description: "Knock detection and retard values"
+    length: 8
+    interval_ms: 20
+    transmitter: ECU
+    signals:
+      - name: "Knock_Level_1"
+        description: "Knock sensor 1 level"
+        start_bit: 0
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 0.1
+        offset: 0
+        unit: ""
+        min: 0
+        max: 100
+
+      - name: "Knock_Level_2"
+        description: "Knock sensor 2 level"
+        start_bit: 16
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 0.1
+        offset: 0
+        unit: ""
+        min: 0
+        max: 100
+
+      - name: "Knock_Retard_1"
+        description: "Knock retard cylinder bank 1"
+        start_bit: 32
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 0.1
+        offset: 0
+        unit: "deg"
+        min: 0
+        max: 30
+
+      - name: "Knock_Retard_2"
+        description: "Knock retard cylinder bank 2"
+        start_bit: 48
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 0.1
+        offset: 0
+        unit: "deg"
+        min: 0
+        max: 30
+
+  # Message 0x366 (Base + 6) - Wheel Speeds
+  - id: 0x366
+    name: "Wheel Speeds"
+    description: "Individual wheel speed sensors"
+    length: 8
+    interval_ms: 20
+    transmitter: ECU
+    signals:
+      - name: "Wheel_Speed_FL"
+        description: "Front left wheel speed"
+        start_bit: 0
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 0.1
+        offset: 0
+        unit: "km/h"
+        min: 0
+        max: 400
+
+      - name: "Wheel_Speed_FR"
+        description: "Front right wheel speed"
+        start_bit: 16
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 0.1
+        offset: 0
+        unit: "km/h"
+        min: 0
+        max: 400
+
+      - name: "Wheel_Speed_RL"
+        description: "Rear left wheel speed"
+        start_bit: 32
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 0.1
+        offset: 0
+        unit: "km/h"
+        min: 0
+        max: 400
+
+      - name: "Wheel_Speed_RR"
+        description: "Rear right wheel speed"
+        start_bit: 48
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 0.1
+        offset: 0
+        unit: "km/h"
+        min: 0
+        max: 400
+
+  # Message 0x367 (Base + 7) - Boost Control
+  - id: 0x367
+    name: "Boost Control"
+    description: "Boost control outputs and targets"
+    length: 8
+    interval_ms: 20
+    transmitter: ECU
+    signals:
+      - name: "Wastegate_Duty"
+        description: "Wastegate solenoid duty cycle"
+        start_bit: 0
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 0.1
+        offset: 0
+        unit: "%"
+        min: 0
+        max: 100
+
+      - name: "Boost_Target"
+        description: "Current boost target"
+        start_bit: 16
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 0.1
+        offset: 0
+        unit: "kPa"
+        min: 0
+        max: 500
+
+      - name: "Boost_Error"
+        description: "Boost control error (target - actual)"
+        start_bit: 32
+        length: 16
+        byte_order: little_endian
+        data_type: signed
+        scale: 0.1
+        offset: 0
+        unit: "kPa"
+        min: -200
+        max: 200
+
+      - name: "Barometric_Pressure"
+        description: "Atmospheric pressure"
+        start_bit: 48
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 0.1
+        offset: 0
+        unit: "kPa"
+        min: 50
+        max: 120
+
+  # Message 0x368 (Base + 8) - EGT Sensors 1-4
+  - id: 0x368
+    name: "EGT Data 1"
+    description: "Exhaust gas temperatures cylinders 1-4"
+    length: 8
+    interval_ms: 100
+    transmitter: ECU
+    signals:
+      - name: "EGT_1"
+        description: "Exhaust gas temperature cylinder 1"
+        start_bit: 0
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 1.0
+        offset: 0
+        unit: "celsius"
+        min: 0
+        max: 1200
+
+      - name: "EGT_2"
+        description: "Exhaust gas temperature cylinder 2"
+        start_bit: 16
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 1.0
+        offset: 0
+        unit: "celsius"
+        min: 0
+        max: 1200
+
+      - name: "EGT_3"
+        description: "Exhaust gas temperature cylinder 3"
+        start_bit: 32
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 1.0
+        offset: 0
+        unit: "celsius"
+        min: 0
+        max: 1200
+
+      - name: "EGT_4"
+        description: "Exhaust gas temperature cylinder 4"
+        start_bit: 48
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 1.0
+        offset: 0
+        unit: "celsius"
+        min: 0
+        max: 1200
+
+  # Message 0x369 (Base + 9) - EGT Sensors 5-8
+  - id: 0x369
+    name: "EGT Data 2"
+    description: "Exhaust gas temperatures cylinders 5-8"
+    length: 8
+    interval_ms: 100
+    transmitter: ECU
+    signals:
+      - name: "EGT_5"
+        description: "Exhaust gas temperature cylinder 5"
+        start_bit: 0
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 1.0
+        offset: 0
+        unit: "celsius"
+        min: 0
+        max: 1200
+
+      - name: "EGT_6"
+        description: "Exhaust gas temperature cylinder 6"
+        start_bit: 16
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 1.0
+        offset: 0
+        unit: "celsius"
+        min: 0
+        max: 1200
+
+      - name: "EGT_7"
+        description: "Exhaust gas temperature cylinder 7"
+        start_bit: 32
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 1.0
+        offset: 0
+        unit: "celsius"
+        min: 0
+        max: 1200
+
+      - name: "EGT_8"
+        description: "Exhaust gas temperature cylinder 8"
+        start_bit: 48
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 1.0
+        offset: 0
+        unit: "celsius"
+        min: 0
+        max: 1200
+
+  # Message 0x36A (Base + 10) - Lambda/Wideband
+  - id: "0x36A"
+    name: "Lambda Data"
+    description: "Lambda sensor values"
+    length: 8
+    interval_ms: 20
+    transmitter: ECU
+    signals:
+      - name: "Lambda_1"
+        description: "Lambda bank 1"
+        start_bit: 0
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 0.001
+        offset: 0
+        unit: "lambda"
+        min: 0.5
+        max: 1.5
+
+      - name: "Lambda_2"
+        description: "Lambda bank 2"
+        start_bit: 16
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 0.001
+        offset: 0
+        unit: "lambda"
+        min: 0.5
+        max: 1.5
+
+      - name: "Lambda_Target"
+        description: "Target lambda"
+        start_bit: 32
+        length: 16
+        byte_order: little_endian
+        data_type: unsigned
+        scale: 0.001
+        offset: 0
+        unit: "lambda"
+        min: 0.5
+        max: 1.5
+
+      - name: "Fuel_Trim"
+        description: "Short-term fuel trim correction"
+        start_bit: 48
+        length: 16
+        byte_order: little_endian
+        data_type: signed
+        scale: 0.1
+        offset: 0
+        unit: "%"
+        min: -50
+        max: 50
+
+enums:
+  - name: "GearPosition"
+    description: "Gear selector position values"
+    values:
+      "0": "Neutral"
+      "1": "1st"
+      "2": "2nd"
+      "3": "3rd"
+      "4": "4th"
+      "5": "5th"
+      "6": "6th"
+      "7": "7th"
+      "8": "8th"
+
+  - name: "LaunchControlState"
+    description: "Launch control system states"
+    values:
+      "0": "Off"
+      "1": "Armed"
+      "2": "Active"
+      "3": "Cooldown"
+
+metadata:
+  author: "OpenECU Alliance"
+  license: "MIT"
+  source_url: "https://support.haltech.com/portal/en/kb/articles/haltech-can-ecu-broadcast-protocol"
+  tested_with:
+    - "Haltech Elite 2500"
+    - "Haltech Elite 1500"
+    - "Haltech Elite 950"
+    - "Haltech Elite 750"
+    - "Haltech Elite 550"
+  compatible_tools:
+    - "CANalyzer"
+    - "PCAN-View"
+    - "SavvyCAN"
+    - "BusMaster"
+    - "RaceChrono"
+    - "AiM data loggers"
+  known_issues:
+    - "Base CAN ID must be configured in Haltech NSP software to match this definition"
+    - "Not all signals may be available depending on ECU configuration"
+    - "EGT channels require EGT expansion module for cylinders 5-8"
+  changelog:
+    - version: "1.0.0"
+      date: "2025-01-06"
+      changes:
+        - "Initial release with core engine messages"
+        - "Includes 11 message definitions with 44 signals"
+        - "Supports Elite 550/750/950/1500/2000/2500 series"
+
+# Haltech-specific extensions
+x_haltech:
+  nsp_software_version: "2.0+"
+  output_mode: "Generic Protocol"
+  can_bus_number: 1
+  notes: |
+    To enable CAN broadcast on Haltech Elite ECUs:
+    1. Open NSP software and connect to ECU
+    2. Navigate to Main Setup > CAN Bus
+    3. Enable "Generic Protocol Output" on desired CAN bus
+    4. Set Base ID (default 0x360)
+    5. Configure broadcast rate as needed

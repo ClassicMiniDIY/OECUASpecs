@@ -1,0 +1,385 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://openecualliance.org/schema/protocol.schema.json",
+  "title": "OpenECU Alliance Protocol",
+  "description": "Schema for OpenECU Alliance CAN Bus protocol definition files",
+  "type": "object",
+  "required": ["openecualliance", "type", "id", "name", "version", "vendor", "protocol", "messages"],
+  "properties": {
+    "openecualliance": {
+      "type": "string",
+      "description": "Specification version",
+      "pattern": "^[0-9]+\\.[0-9]+$",
+      "examples": ["1.0"]
+    },
+    "type": {
+      "type": "string",
+      "const": "protocol",
+      "description": "Content type identifier"
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique protocol identifier",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "examples": ["haltech-elite-broadcast", "link-g4x-broadcast", "aim-smartycam"]
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable protocol name",
+      "minLength": 1,
+      "examples": ["Haltech Elite CAN Broadcast", "Link G4X CAN Stream"]
+    },
+    "version": {
+      "type": "string",
+      "description": "Protocol definition version (semver)",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[a-zA-Z0-9.]+)?(\\+[a-zA-Z0-9.]+)?$",
+      "examples": ["1.0.0", "2.1.0-beta.1"]
+    },
+    "vendor": {
+      "type": "string",
+      "description": "ECU vendor/manufacturer",
+      "minLength": 1,
+      "examples": ["haltech", "link", "aim", "ecumaster"]
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed description of the protocol"
+    },
+    "website": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL for protocol documentation"
+    },
+    "branding": {
+      "type": "object",
+      "description": "Vendor branding assets (optional but recommended)",
+      "properties": {
+        "logo": {
+          "type": "string",
+          "description": "Path to full logo image (relative to assets/logos/)",
+          "pattern": "^[a-z0-9-]+\\.(svg|png|jpg|gif)$"
+        },
+        "icon": {
+          "type": "string",
+          "description": "Path to square icon (relative to assets/icons/)",
+          "pattern": "^[a-z0-9-]+\\.(svg|png|jpg|gif)$"
+        },
+        "banner": {
+          "type": "string",
+          "description": "Path to banner image (relative to assets/banners/)",
+          "pattern": "^[a-z0-9-]+\\.(svg|png|jpg)$"
+        },
+        "color_primary": {
+          "type": "string",
+          "description": "Primary brand color in hex format",
+          "pattern": "^#[0-9A-Fa-f]{6}$"
+        },
+        "color_secondary": {
+          "type": "string",
+          "description": "Secondary brand color in hex format",
+          "pattern": "^#[0-9A-Fa-f]{6}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "protocol": {
+      "type": "object",
+      "description": "Protocol specification",
+      "required": ["type", "baudrate"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["can", "canfd", "lin", "k-line"],
+          "description": "Protocol type"
+        },
+        "baudrate": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Communication speed in bits per second",
+          "examples": [500000, 1000000]
+        },
+        "extended_id": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to use 29-bit extended IDs (true) or 11-bit standard IDs (false)"
+        },
+        "data_baudrate": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Data phase baudrate for CAN FD (bits per second)"
+        },
+        "fd_enabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether CAN FD is enabled"
+        },
+        "base_id": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Base message ID (if configurable)"
+        },
+        "base_id_configurable": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether base ID can be changed in ECU settings"
+        },
+        "base_id_range": {
+          "type": "object",
+          "description": "Valid range for base ID if configurable",
+          "properties": {
+            "min": { "type": "integer", "minimum": 0 },
+            "max": { "type": "integer", "minimum": 0 }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "messages": {
+      "type": "array",
+      "description": "CAN message definitions",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/message"
+      }
+    },
+    "enums": {
+      "type": "array",
+      "description": "Enumeration definitions for discrete signals",
+      "items": {
+        "$ref": "#/definitions/enum"
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata",
+      "properties": {
+        "author": {
+          "type": "string",
+          "description": "Protocol definition author"
+        },
+        "license": {
+          "type": "string",
+          "description": "License for this definition"
+        },
+        "source_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to official protocol documentation"
+        },
+        "repository": {
+          "type": "string",
+          "format": "uri",
+          "description": "Source repository URL"
+        },
+        "tested_with": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "ECU models tested with this protocol"
+        },
+        "compatible_tools": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Compatible CAN analysis tools",
+          "examples": [["CANalyzer", "PCAN-View", "SavvyCAN"]]
+        },
+        "known_issues": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Known issues or limitations"
+        },
+        "changelog": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["version", "date", "changes"],
+            "properties": {
+              "version": { "type": "string" },
+              "date": { "type": "string", "format": "date" },
+              "changes": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            }
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "patternProperties": {
+    "^x_": {
+      "description": "Custom extension fields"
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "message": {
+      "type": "object",
+      "description": "CAN message definition",
+      "required": ["id", "name", "length", "signals"],
+      "properties": {
+        "id": {
+          "oneOf": [
+            { "type": "integer", "minimum": 0, "maximum": 536870911 },
+            { "type": "string", "pattern": "^0x[0-9A-Fa-f]+$" }
+          ],
+          "description": "CAN message ID (decimal or hex string)",
+          "examples": [864, "0x360"]
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable message name",
+          "minLength": 1,
+          "examples": ["Engine Data 1", "Wheel Speeds"]
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of this message"
+        },
+        "length": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 64,
+          "description": "Message length in bytes (0-8 for CAN, 0-64 for CAN FD)"
+        },
+        "interval_ms": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Broadcast interval in milliseconds"
+        },
+        "transmitter": {
+          "type": "string",
+          "description": "Node that transmits this message",
+          "examples": ["ECU", "Dashboard", "ABS"]
+        },
+        "signals": {
+          "type": "array",
+          "description": "Signal definitions within this message",
+          "items": {
+            "$ref": "#/definitions/signal"
+          }
+        },
+        "multiplexer": {
+          "type": "object",
+          "description": "Multiplexer configuration for multiplexed messages",
+          "properties": {
+            "signal_name": {
+              "type": "string",
+              "description": "Name of the multiplexer signal"
+            },
+            "start_bit": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "length": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "signal": {
+      "type": "object",
+      "description": "CAN signal definition",
+      "required": ["name", "start_bit", "length", "byte_order", "data_type"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Signal name",
+          "minLength": 1,
+          "examples": ["RPM", "Coolant_Temp", "TPS"]
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of this signal"
+        },
+        "start_bit": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 511,
+          "description": "Starting bit position (0-indexed)"
+        },
+        "length": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 64,
+          "description": "Signal length in bits"
+        },
+        "byte_order": {
+          "type": "string",
+          "enum": ["little_endian", "big_endian"],
+          "description": "Byte order (Intel = little_endian, Motorola = big_endian)"
+        },
+        "data_type": {
+          "type": "string",
+          "enum": ["unsigned", "signed", "float", "double"],
+          "description": "Data type interpretation"
+        },
+        "scale": {
+          "type": "number",
+          "default": 1,
+          "description": "Scale factor: physical_value = (raw_value * scale) + offset"
+        },
+        "offset": {
+          "type": "number",
+          "default": 0,
+          "description": "Offset value: physical_value = (raw_value * scale) + offset"
+        },
+        "unit": {
+          "type": "string",
+          "description": "Physical unit of the signal",
+          "examples": ["rpm", "kPa", "celsius", "%", "deg", "m/s"]
+        },
+        "min": {
+          "type": "number",
+          "description": "Minimum physical value"
+        },
+        "max": {
+          "type": "number",
+          "description": "Maximum physical value"
+        },
+        "enum_ref": {
+          "type": "string",
+          "description": "Reference to an enum definition for discrete values"
+        },
+        "multiplexer_value": {
+          "type": "integer",
+          "description": "Multiplexer value for this signal (if message is multiplexed)"
+        },
+        "comment": {
+          "type": "string",
+          "description": "Additional notes about this signal"
+        }
+      },
+      "additionalProperties": false
+    },
+    "enum": {
+      "type": "object",
+      "description": "Enumeration definition for discrete signal values",
+      "required": ["name", "values"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Enumeration name",
+          "pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+          "examples": ["GearPosition", "EngineState", "FuelType"]
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of this enumeration"
+        },
+        "values": {
+          "type": "object",
+          "description": "Mapping of raw values to labels",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "examples": [{ "0": "Neutral", "1": "First", "2": "Second" }]
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
