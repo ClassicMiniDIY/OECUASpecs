@@ -30,8 +30,8 @@ description: |
 website: "https://www.maxxecu.com/webhelp/can-default_maxxecu_protocol.html"
 
 branding:
-  logo: maxxecu-logo.svg
-  icon: maxxecu-icon.svg
+  logo: maxxecu-logo.jpg
+  icon: maxxecu-icon.jpg
   color_primary: "#0066CC"
   color_secondary: "#FFFFFF"
 

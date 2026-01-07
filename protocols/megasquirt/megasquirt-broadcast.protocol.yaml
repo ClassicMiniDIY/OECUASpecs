@@ -34,8 +34,8 @@ description: |
 website: "http://www.megamanual.com/com/CAN.htm"
 
 branding:
-  logo: megasquirt-logo.svg
-  icon: megasquirt-icon.svg
+  logo: megasquirt-logo.png
+  icon: megasquirt-icon.png
   color_primary: "#CC0000"
   color_secondary: "#222222"
 

@@ -30,8 +30,8 @@ description: |
 website: "https://www.syvecs.com"
 
 branding:
-  logo: syvecs-logo.svg
-  icon: syvecs-icon.svg
+  logo: syvecs-logo.png
+  icon: syvecs-icon.png
   color_primary: "#6600CC"
   color_secondary: "#1A1A1A"
 

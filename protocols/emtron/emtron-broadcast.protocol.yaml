@@ -37,8 +37,9 @@ description: |
 website: "https://emtron.world/"
 
 branding:
-  logo: emtron-logo.svg
-  icon: emtron-icon.svg
+  # Note: Emtron logo not yet available - emtron.com.au website was down
+  # logo: emtron-logo.png
+  # icon: emtron-icon.png
   color_primary: "#E31837"
   color_secondary: "#000000"
 

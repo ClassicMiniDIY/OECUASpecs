@@ -44,8 +44,8 @@ description: |
 website: "https://rusefi.com"
 
 branding:
-  logo: rusefi-logo.svg
-  icon: rusefi-icon.svg
+  logo: rusefi-logo.png
+  icon: rusefi-icon.png
   color_primary: "#00AA00"
   color_secondary: "#1A1A1A"
 
