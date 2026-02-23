@@ -18,7 +18,6 @@ description: |
   Note: Raw values require conversion based on the Type field. This adapter
   assumes applications will apply conversions or data is pre-converted.
 website: "https://www.haltech.com"
-
 branding:
   logo: haltech-logo.svg
   icon: haltech-icon.svg
@@ -31,10 +30,10 @@ file_format:
   extensions: [".csv"]
   encoding: utf-8
   delimiter: ","
-  header_row: -1  # No traditional header row; channel names from metadata
-  data_start_row: -1  # Variable; starts after channel definitions
-  timestamp_column: null  # First column is timestamp in HH:MM:SS.mmm format
-  timestamp_unit: null  # Custom format, not raw seconds
+  header_row: -1 # No traditional header row; channel names from metadata
+  data_start_row: -1 # Variable; starts after channel definitions
+  timestamp_column: null # First column is timestamp in HH:MM:SS.mmm format
+  timestamp_unit: null # Custom format, not raw seconds
 
 channels:
   # Engine Core

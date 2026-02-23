@@ -73,7 +73,9 @@ function generateDBC(protocol) {
     const msgId = parseMessageId(msg.id);
     const transmitter = msg.transmitter || "ECU";
 
-    lines.push(`BO_ ${msgId} ${msg.name.replace(/\s+/g, "_")}: ${msg.length} ${transmitter}`);
+    lines.push(
+      `BO_ ${msgId} ${msg.name.replace(/\s+/g, "_")}: ${msg.length} ${transmitter}`,
+    );
 
     for (const signal of msg.signals || []) {
       const startBit = signal.start_bit;
@@ -87,7 +89,7 @@ function generateDBC(protocol) {
       const unit = signal.unit || "";
 
       lines.push(
-        ` SG_ ${signal.name.replace(/\s+/g, "_")} : ${startBit}|${length}@${byteOrder}${valueType} (${scale},${offset}) [${min}|${max}] "${unit}" Vector__XXX`
+        ` SG_ ${signal.name.replace(/\s+/g, "_")} : ${startBit}|${length}@${byteOrder}${valueType} (${scale},${offset}) [${min}|${max}] "${unit}" Vector__XXX`,
       );
     }
     lines.push("");
@@ -98,7 +100,9 @@ function generateDBC(protocol) {
   for (const msg of protocol.messages) {
     const msgId = parseMessageId(msg.id);
     if (msg.description) {
-      lines.push(`CM_ BO_ ${msgId} "${msg.description.replace(/"/g, '\\"').replace(/\n/g, " ")}";`);
+      lines.push(
+        `CM_ BO_ ${msgId} "${msg.description.replace(/"/g, '\\"').replace(/\n/g, " ")}";`,
+      );
     }
   }
 
@@ -108,7 +112,7 @@ function generateDBC(protocol) {
     for (const signal of msg.signals || []) {
       if (signal.description) {
         lines.push(
-          `CM_ SG_ ${msgId} ${signal.name.replace(/\s+/g, "_")} "${signal.description.replace(/"/g, '\\"').replace(/\n/g, " ")}";`
+          `CM_ SG_ ${msgId} ${signal.name.replace(/\s+/g, "_")} "${signal.description.replace(/"/g, '\\"').replace(/\n/g, " ")}";`,
         );
       }
     }
@@ -126,7 +130,9 @@ function generateDBC(protocol) {
             const valueStrings = Object.entries(enumDef.values)
               .map(([value, label]) => `${value} "${label}"`)
               .join(" ");
-            lines.push(`VAL_ ${msgId} ${signal.name.replace(/\s+/g, "_")} ${valueStrings};`);
+            lines.push(
+              `VAL_ ${msgId} ${signal.name.replace(/\s+/g, "_")} ${valueStrings};`,
+            );
           }
         }
       }
@@ -195,7 +201,10 @@ function convertAll() {
 
       if (stat.isDirectory()) {
         walkDir(filePath);
-      } else if (file.endsWith(".protocol.yaml") || file.endsWith(".protocol.yml")) {
+      } else if (
+        file.endsWith(".protocol.yaml") ||
+        file.endsWith(".protocol.yml")
+      ) {
         try {
           if (convertFile(filePath)) {
             converted++;
@@ -223,7 +232,9 @@ if (args.length === 0) {
   console.log("  node generate-dbc.js --all");
   console.log("");
   console.log("Examples:");
-  console.log("  node generate-dbc.js protocols/haltech/haltech-elite-broadcast.protocol.yaml");
+  console.log(
+    "  node generate-dbc.js protocols/haltech/haltech-elite-broadcast.protocol.yaml",
+  );
   console.log("  node generate-dbc.js --all");
   process.exit(0);
 }

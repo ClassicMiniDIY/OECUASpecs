@@ -4,7 +4,15 @@
   "title": "OpenECU Alliance Adapter",
   "description": "Schema for OpenECU Alliance adapter specification files",
   "type": "object",
-  "required": ["openecualliance", "id", "name", "version", "vendor", "file_format", "channels"],
+  "required": [
+    "openecualliance",
+    "id",
+    "name",
+    "version",
+    "vendor",
+    "file_format",
+    "channels"
+  ],
   "properties": {
     "openecualliance": {
       "type": "string",
@@ -260,7 +268,14 @@
   "definitions": {
     "channel": {
       "type": "object",
-      "required": ["id", "name", "category", "data_type", "unit", "source_names"],
+      "required": [
+        "id",
+        "name",
+        "category",
+        "data_type",
+        "unit",
+        "source_names"
+      ],
       "properties": {
         "id": {
           "type": "string",

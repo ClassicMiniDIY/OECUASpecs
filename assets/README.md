@@ -18,47 +18,49 @@ assets/
 
 Full vendor logos, typically the horizontal/primary version.
 
-| Property | Requirement |
-|----------|-------------|
-| **Format** | SVG (preferred) or PNG |
-| **Size** | Minimum 400px wide |
-| **Background** | Transparent |
-| **Naming** | `{vendor}-logo.{ext}` (e.g., `haltech-logo.svg`) |
-| **Color** | Original brand colors; optionally include `-white` or `-dark` variants |
+| Property       | Requirement                                                            |
+| -------------- | ---------------------------------------------------------------------- |
+| **Format**     | SVG (preferred) or PNG                                                 |
+| **Size**       | Minimum 400px wide                                                     |
+| **Background** | Transparent                                                            |
+| **Naming**     | `{vendor}-logo.{ext}` (e.g., `haltech-logo.svg`)                       |
+| **Color**      | Original brand colors; optionally include `-white` or `-dark` variants |
 
 ### Icons (`icons/`)
 
 Square icons suitable for thumbnails, favicons, and app icons.
 
-| Property | Requirement |
-|----------|-------------|
-| **Format** | SVG (preferred) or PNG |
-| **Size** | 256x256 pixels (or scalable SVG) |
-| **Aspect Ratio** | 1:1 (square) |
-| **Background** | Transparent |
-| **Naming** | `{vendor}-icon.{ext}` (e.g., `haltech-icon.svg`) |
+| Property         | Requirement                                      |
+| ---------------- | ------------------------------------------------ |
+| **Format**       | SVG (preferred) or PNG                           |
+| **Size**         | 256x256 pixels (or scalable SVG)                 |
+| **Aspect Ratio** | 1:1 (square)                                     |
+| **Background**   | Transparent                                      |
+| **Naming**       | `{vendor}-icon.{ext}` (e.g., `haltech-icon.svg`) |
 
 ### Banners (`banners/`)
 
 Banner images for social sharing and headers.
 
-| Property | Requirement |
-|----------|-------------|
-| **Format** | PNG or JPG |
-| **Size** | 1200x630 pixels (Open Graph standard) |
-| **Background** | Solid color or gradient (not transparent) |
-| **Naming** | `{vendor}-banner.{ext}` (e.g., `haltech-banner.png`) |
+| Property       | Requirement                                          |
+| -------------- | ---------------------------------------------------- |
+| **Format**     | PNG or JPG                                           |
+| **Size**       | 1200x630 pixels (Open Graph standard)                |
+| **Background** | Solid color or gradient (not transparent)            |
+| **Naming**     | `{vendor}-banner.{ext}` (e.g., `haltech-banner.png`) |
 
 ## Adding New Assets
 
 ### 1. Source Requirements
 
 **Acceptable sources:**
+
 - Official vendor press kits / media pages
 - Direct permission from vendor
 - Assets you have rights to use
 
 **Not acceptable:**
+
 - Screenshots or low-quality captures
 - Modified third-party images
 - Assets without clear licensing
@@ -66,11 +68,13 @@ Banner images for social sharing and headers.
 ### 2. File Naming
 
 All files must be lowercase with hyphens:
+
 - `haltech-logo.svg`
 - `ecumaster-icon.png`
 - `aim-banner.png`
 
 Variants can be named:
+
 - `haltech-logo-white.svg` (white version)
 - `haltech-logo-dark.svg` (dark version)
 
@@ -90,6 +94,7 @@ branding:
 ### 4. Pull Request
 
 When submitting assets:
+
 1. Include source/permission documentation
 2. Confirm you have rights to use the assets
 3. Test that files display correctly
@@ -98,6 +103,7 @@ When submitting assets:
 ## License & Attribution
 
 Brand assets remain property of their respective owners. They are included here under fair use for:
+
 - Identification of ECU systems in compatible applications
 - Educational and informational purposes
 - Non-commercial open source ecosystem use
@@ -106,13 +112,13 @@ If you are a vendor representative and have concerns about asset usage, please c
 
 ## Current Assets
 
-| Vendor | Logo | Icon | Banner | Colors |
-|--------|------|------|--------|--------|
-| Haltech | Pending | Pending | Pending | Pending |
+| Vendor    | Logo    | Icon    | Banner  | Colors  |
+| --------- | ------- | ------- | ------- | ------- |
+| Haltech   | Pending | Pending | Pending | Pending |
 | ECUMaster | Pending | Pending | Pending | Pending |
-| Link | Pending | Pending | Pending | Pending |
-| AiM | Pending | Pending | Pending | Pending |
+| Link      | Pending | Pending | Pending | Pending |
+| AiM       | Pending | Pending | Pending | Pending |
 | RomRaider | Pending | Pending | Pending | Pending |
 | Speeduino | Pending | Pending | Pending | Pending |
-| rusEFI | Pending | Pending | Pending | Pending |
-| Emerald | Pending | Pending | Pending | Pending |
+| rusEFI    | Pending | Pending | Pending | Pending |
+| Emerald   | Pending | Pending | Pending | Pending |

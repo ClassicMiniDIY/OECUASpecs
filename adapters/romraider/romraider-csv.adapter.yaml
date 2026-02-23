@@ -17,7 +17,6 @@ description: |
   - Channel names include units in parentheses (e.g., "Engine Speed (rpm)")
   - Subaru-specific parameters like IAM, A/F Learning, etc.
 website: "https://www.romraider.com"
-
 branding:
   logo: romraider-logo.gif
   icon: romraider-icon.gif
@@ -29,7 +28,7 @@ file_format:
   type: csv
   extensions: [".csv", ".log"]
   encoding: utf-8
-  delimiter: ","  # US locale; European uses semicolon
+  delimiter: "," # US locale; European uses semicolon
   header_row: 0
   data_start_row: 1
   timestamp_column: "Time"
@@ -467,4 +466,5 @@ metadata:
 x_romraider:
   european_locale_support: true
   units_in_parentheses: true
-  subaru_specific_channels: ["iam", "dam", "fine_knock_learning", "feedback_knock"]
+  subaru_specific_channels:
+    ["iam", "dam", "fine_knock_learning", "feedback_knock"]

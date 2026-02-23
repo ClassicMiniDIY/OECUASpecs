@@ -4,11 +4,11 @@ Welcome! The OpenECU Alliance is a community-driven project that provides free, 
 
 ## What Can You Contribute?
 
-| Content Type | Description | Directory |
-|--------------|-------------|-----------|
-| **Adapters** | Log file format definitions for ECU data loggers | `adapters/` |
+| Content Type  | Description                                         | Directory    |
+| ------------- | --------------------------------------------------- | ------------ |
+| **Adapters**  | Log file format definitions for ECU data loggers    | `adapters/`  |
 | **Protocols** | CAN Bus protocol definitions (message IDs, signals) | `protocols/` |
-| **3D Models** | Printable mounts, enclosures, brackets | `models/` |
+| **3D Models** | Printable mounts, enclosures, brackets              | `models/`    |
 
 ---
 
@@ -105,20 +105,20 @@ channels:
 
 Use these standardized categories:
 
-| Category | Examples |
-|----------|----------|
-| `engine` | RPM, TPS, MAP |
-| `fuel` | AFR, Lambda, Fuel Pressure |
-| `ignition` | Timing, Dwell, Knock |
-| `temperature` | Coolant, IAT, Oil, EGT |
-| `pressure` | Boost, Oil, Fuel |
-| `electrical` | Battery Voltage |
-| `speed` | Vehicle Speed, Wheel Speeds |
-| `drivetrain` | Gear Position |
-| `correction` | Fuel Trim, Knock Retard |
-| `acceleration` | G-forces |
-| `position` | GPS coordinates |
-| `custom` | Vendor-specific channels |
+| Category       | Examples                    |
+| -------------- | --------------------------- |
+| `engine`       | RPM, TPS, MAP               |
+| `fuel`         | AFR, Lambda, Fuel Pressure  |
+| `ignition`     | Timing, Dwell, Knock        |
+| `temperature`  | Coolant, IAT, Oil, EGT      |
+| `pressure`     | Boost, Oil, Fuel            |
+| `electrical`   | Battery Voltage             |
+| `speed`        | Vehicle Speed, Wheel Speeds |
+| `drivetrain`   | Gear Position               |
+| `correction`   | Fuel Trim, Knock Retard     |
+| `acceleration` | G-forces                    |
+| `position`     | GPS coordinates             |
+| `custom`       | Vendor-specific channels    |
 
 ### Tips for Good Adapters
 
@@ -180,15 +180,15 @@ messages:
 
 Each signal must specify:
 
-| Field | Description | Example |
-|-------|-------------|---------|
-| `start_bit` | Bit position (0-indexed from byte 0) | `0`, `16`, `32` |
-| `length` | Signal length in bits | `8`, `16`, `32` |
-| `byte_order` | `little_endian` (Intel) or `big_endian` (Motorola) | `little_endian` |
-| `data_type` | `unsigned`, `signed`, `float`, `double` | `unsigned` |
-| `scale` | Multiply raw value by this | `0.1`, `0.001` |
-| `offset` | Add this after scaling | `0`, `-40` |
-| `unit` | Physical unit | `rpm`, `kPa`, `celsius` |
+| Field        | Description                                        | Example                 |
+| ------------ | -------------------------------------------------- | ----------------------- |
+| `start_bit`  | Bit position (0-indexed from byte 0)               | `0`, `16`, `32`         |
+| `length`     | Signal length in bits                              | `8`, `16`, `32`         |
+| `byte_order` | `little_endian` (Intel) or `big_endian` (Motorola) | `little_endian`         |
+| `data_type`  | `unsigned`, `signed`, `float`, `double`            | `unsigned`              |
+| `scale`      | Multiply raw value by this                         | `0.1`, `0.001`          |
+| `offset`     | Add this after scaling                             | `0`, `-40`              |
+| `unit`       | Physical unit                                      | `rpm`, `kPa`, `celsius` |
 
 **Physical Value Formula:** `physical = (raw × scale) + offset`
 
@@ -218,13 +218,13 @@ models/
 
 ### Categories
 
-| Category | Description |
-|----------|-------------|
-| `mounts` | ECU mounting brackets |
-| `enclosures` | ECU cases and housings |
-| `brackets` | Sensor and component brackets |
-| `adapters` | Physical connector adapters |
-| `accessories` | Misc accessories |
+| Category      | Description                   |
+| ------------- | ----------------------------- |
+| `mounts`      | ECU mounting brackets         |
+| `enclosures`  | ECU cases and housings        |
+| `brackets`    | Sensor and component brackets |
+| `adapters`    | Physical connector adapters   |
+| `accessories` | Misc accessories              |
 
 ### Minimal Example
 
@@ -237,7 +237,6 @@ version: "1.0.0"
 description: |
   A mounting bracket for XYZ ECU.
 category: mounts
-
 files:
   - filename: my-ecu-mount.stl
     format: stl
@@ -252,13 +251,13 @@ printing:
 
 ### Print Settings Guidelines
 
-| Setting | Recommended | Notes |
-|---------|-------------|-------|
-| Material | PETG, ASA, ABS | Never PLA for engine bay! |
-| Layer Height | 0.2mm | Good balance of speed/quality |
-| Infill | 30-50% | Higher for structural parts |
-| Walls | 3-4 | More for screw holes |
-| Supports | Minimize | Design to avoid when possible |
+| Setting      | Recommended    | Notes                         |
+| ------------ | -------------- | ----------------------------- |
+| Material     | PETG, ASA, ABS | Never PLA for engine bay!     |
+| Layer Height | 0.2mm          | Good balance of speed/quality |
+| Infill       | 30-50%         | Higher for structural parts   |
+| Walls        | 3-4            | More for screw holes          |
+| Supports     | Minimize       | Design to avoid when possible |
 
 ### Required Files
 
@@ -274,11 +273,11 @@ printing:
 
 ### Image Requirements
 
-| Type | Purpose | Requirements |
-|------|---------|--------------|
-| `render` | 3D visualization | Good lighting, neutral background |
-| `photo` | Real-world examples | Clear, well-lit |
-| `diagram` | Technical drawings | Dimensions in mm, readable text |
+| Type      | Purpose             | Requirements                      |
+| --------- | ------------------- | --------------------------------- |
+| `render`  | 3D visualization    | Good lighting, neutral background |
+| `photo`   | Real-world examples | Clear, well-lit                   |
+| `diagram` | Technical drawings  | Dimensions in mm, readable text   |
 
 ---
 
@@ -320,11 +319,11 @@ Before submitting, verify:
 
 If adding a new vendor, consider including:
 
-| Asset | Location | Requirements |
-|-------|----------|--------------|
-| Logo | `assets/logos/` | SVG preferred, min 400px wide |
-| Icon | `assets/icons/` | Square, 256×256 or scalable |
-| Colors | In YAML | Hex format (`#RRGGBB`) |
+| Asset  | Location        | Requirements                  |
+| ------ | --------------- | ----------------------------- |
+| Logo   | `assets/logos/` | SVG preferred, min 400px wide |
+| Icon   | `assets/icons/` | Square, 256×256 or scalable   |
+| Colors | In YAML         | Hex format (`#RRGGBB`)        |
 
 ---
 

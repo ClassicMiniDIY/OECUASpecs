@@ -68,16 +68,19 @@ adapters/
 When creating a new adapter:
 
 1. **Create vendor directory** if it doesn't exist:
+
    ```bash
    mkdir -p adapters/{vendor}
    ```
 
 2. **Create adapter file** following the naming convention:
+
    ```bash
    touch adapters/{vendor}/{vendor}-{format}.adapter.yaml
    ```
 
 3. **Required fields** in every adapter:
+
    ```yaml
    openecualliance: "1.0"
    id: vendor-format
@@ -85,7 +88,7 @@ When creating a new adapter:
    version: "1.0.0"
    vendor: vendorname
    file_format:
-     type: csv  # or binary
+     type: csv # or binary
      extensions: [".csv"]
      # ... format-specific fields
    channels:
@@ -103,6 +106,7 @@ When creating a new adapter:
 Use these standardized IDs when mapping vendor-specific channels:
 
 **Engine:**
+
 - `rpm` - Engine speed
 - `tps` - Throttle position (%)
 - `map` - Manifold absolute pressure
@@ -110,6 +114,7 @@ Use these standardized IDs when mapping vendor-specific channels:
 - `ignition_advance` - Spark timing
 
 **Fuel:**
+
 - `afr` - Air-fuel ratio
 - `afr_target` - Target AFR
 - `afr_1`, `afr_2` - Per-bank AFR
@@ -119,6 +124,7 @@ Use these standardized IDs when mapping vendor-specific channels:
 - `fuel_pressure` - Fuel rail pressure
 
 **Temperature:**
+
 - `coolant_temp` - Engine coolant
 - `iat` - Intake air temperature
 - `oil_temp` - Oil temperature
@@ -126,21 +132,26 @@ Use these standardized IDs when mapping vendor-specific channels:
 - `egt_1` through `egt_8` - Per-cylinder EGT
 
 **Pressure:**
+
 - `boost` - Boost pressure (gauge)
 - `oil_pressure` - Oil pressure
 - `barometric` - Barometric pressure
 
 **Electrical:**
+
 - `battery_voltage` - System voltage
 
 **Speed:**
+
 - `vehicle_speed` - Vehicle speed
 - `wheel_speed_fl`, `wheel_speed_fr`, `wheel_speed_rl`, `wheel_speed_rr`
 
 **Drivetrain:**
+
 - `gear` - Current gear
 
 **Corrections:**
+
 - `ego_correction` - Closed-loop fuel correction
 - `knock_retard` - Knock-induced timing retard
 - `knock_level` - Knock sensor level
@@ -151,11 +162,11 @@ The `source_names` array should include ALL known variations of how this channel
 
 ```yaml
 source_names:
-  - "Engine RPM"        # Most common
-  - "RPM"               # Abbreviated
-  - "Engine Speed"      # Alternative
-  - "Eng RPM"           # Short form
-  - "engine/rpm"        # Path-style (some ECUs)
+  - "Engine RPM" # Most common
+  - "RPM" # Abbreviated
+  - "Engine Speed" # Alternative
+  - "Eng RPM" # Short form
+  - "engine/rpm" # Path-style (some ECUs)
 ```
 
 ## Validation
@@ -183,6 +194,7 @@ Each adapter has its own version following semver:
 ### Specification Versioning
 
 The `openecualliance` field indicates spec version compatibility:
+
 - Current: `"1.0"`
 
 ## Testing Adapters

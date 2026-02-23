@@ -4,7 +4,16 @@
   "title": "OpenECU Alliance Protocol",
   "description": "Schema for OpenECU Alliance CAN Bus protocol definition files",
   "type": "object",
-  "required": ["openecualliance", "type", "id", "name", "version", "vendor", "protocol", "messages"],
+  "required": [
+    "openecualliance",
+    "type",
+    "id",
+    "name",
+    "version",
+    "vendor",
+    "protocol",
+    "messages"
+  ],
   "properties": {
     "openecualliance": {
       "type": "string",
@@ -21,7 +30,11 @@
       "type": "string",
       "description": "Unique protocol identifier",
       "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
-      "examples": ["haltech-elite-broadcast", "link-g4x-broadcast", "aim-smartycam"]
+      "examples": [
+        "haltech-elite-broadcast",
+        "link-g4x-broadcast",
+        "aim-smartycam"
+      ]
     },
     "name": {
       "type": "string",

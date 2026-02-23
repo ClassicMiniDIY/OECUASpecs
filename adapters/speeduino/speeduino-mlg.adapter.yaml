@@ -17,7 +17,6 @@ description: |
   - Big-endian byte order
   - Timestamp wraps at 65535ms (~65.5 seconds)
 website: "https://speeduino.com"
-
 branding:
   logo: speeduino-logo.png
   icon: speeduino-icon.png
@@ -29,7 +28,7 @@ file_format:
   type: binary
   extensions: [".mlg"]
   endianness: big
-  magic_bytes: [0x4D, 0x4C, 0x56, 0x4C, 0x47]  # "MLVLG"
+  magic_bytes: [0x4D, 0x4C, 0x56, 0x4C, 0x47] # "MLVLG"
   specification_url: "https://github.com/speeduino/speeduino"
 
 channels:

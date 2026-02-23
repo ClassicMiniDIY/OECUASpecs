@@ -9,15 +9,16 @@
 
 The OpenECU Alliance is a community-driven initiative providing free, open resources for the automotive ECU enthusiast community. We share three types of standardized content:
 
-| Content | Description | Use Case |
-|---------|-------------|----------|
-| **Adapters** | Log file format definitions | Parse ECU logs in any application |
-| **Protocols** | CAN Bus message definitions | Real-time ECU communication |
-| **3D Models** | Printable hardware designs | Mounts, enclosures, brackets |
+| Content       | Description                 | Use Case                          |
+| ------------- | --------------------------- | --------------------------------- |
+| **Adapters**  | Log file format definitions | Parse ECU logs in any application |
+| **Protocols** | CAN Bus message definitions | Real-time ECU communication       |
+| **3D Models** | Printable hardware designs  | Mounts, enclosures, brackets      |
 
 ### Why Standardize?
 
 Every ECU manufacturer does things differently:
+
 - Haltech calls it "Engine RPM", Link calls it "Engine Speed", AiM calls it "RPM"
 - CAN message structures vary between vendors
 - There's no central place to find printable ECU accessories
@@ -60,16 +61,17 @@ Adapters define how to parse ECU log files and map vendor-specific channel names
 
 ### Available Adapters
 
-| Vendor | Adapter | Format | Channels |
-|--------|---------|--------|----------|
-| Haltech | [haltech-nsp](adapters/haltech/haltech-nsp.adapter.yaml) | CSV | 62 |
-| ECUMaster | [ecumaster-emu-csv](adapters/ecumaster/ecumaster-emu-csv.adapter.yaml) | CSV | 54 |
-| RomRaider | [romraider-csv](adapters/romraider/romraider-csv.adapter.yaml) | CSV | 47 |
-| Link ECU | [link-llg](adapters/link/link-llg.adapter.yaml) | Binary | 73 |
-| AiM | [aim-xrk](adapters/aim/aim-xrk.adapter.yaml) | Binary | 65 |
-| Speeduino | [speeduino-mlg](adapters/speeduino/speeduino-mlg.adapter.yaml) | Binary | 36 |
-| rusEFI | [rusefi-mlg](adapters/rusefi/rusefi-mlg.adapter.yaml) | Binary | 58 |
-| Emerald | [emerald-lg](adapters/emerald/emerald-lg.adapter.yaml) | Binary | 42 |
+| Vendor     | Adapter                                                                           | Format | Channels |
+| ---------- | --------------------------------------------------------------------------------- | ------ | -------- |
+| Haltech    | [haltech-nsp](adapters/haltech/haltech-nsp.adapter.yaml)                          | CSV    | 62       |
+| ECUMaster  | [ecumaster-emu-csv](adapters/ecumaster/ecumaster-emu-csv.adapter.yaml)            | CSV    | 54       |
+| RomRaider  | [romraider-csv](adapters/romraider/romraider-csv.adapter.yaml)                    | CSV    | 47       |
+| Link ECU   | [link-llg](adapters/link/link-llg.adapter.yaml)                                   | Binary | 73       |
+| AiM        | [aim-xrk](adapters/aim/aim-xrk.adapter.yaml)                                      | Binary | 65       |
+| Speeduino  | [speeduino-mlg](adapters/speeduino/speeduino-mlg.adapter.yaml)                    | Binary | 36       |
+| rusEFI     | [rusefi-mlg](adapters/rusefi/rusefi-mlg.adapter.yaml)                             | Binary | 58       |
+| Emerald    | [emerald-lg](adapters/emerald/emerald-lg.adapter.yaml)                            | Binary | 42       |
+| MegaSquirt | [megasquirt-tunerstudio](adapters/megasquirt/megasquirt-tunerstudio.adapter.yaml) | CSV    | 21       |
 
 ---
 
@@ -79,9 +81,9 @@ Protocols define CAN Bus message structures for real-time ECU data streaming. Ea
 
 ### Available Protocols
 
-| Vendor | Protocol | Baud Rate | Messages |
-|--------|----------|-----------|----------|
-| Haltech | [haltech-elite-broadcast](protocols/haltech/haltech-elite-broadcast.protocol.yaml) | 1 Mbps | 11 |
+| Vendor  | Protocol                                                                           | Baud Rate | Messages |
+| ------- | ---------------------------------------------------------------------------------- | --------- | -------- |
+| Haltech | [haltech-elite-broadcast](protocols/haltech/haltech-elite-broadcast.protocol.yaml) | 1 Mbps    | 11       |
 
 **Coming Soon:** Link, ECUMaster, AiM, Speeduino
 
@@ -97,19 +99,19 @@ Printable hardware designs for ECU-related accessories with full print settings 
 
 ### Model Categories
 
-| Category | Description |
-|----------|-------------|
-| **Mounts** | ECU mounting brackets |
-| **Enclosures** | ECU cases and housings |
-| **Brackets** | Sensor and component brackets |
-| **Adapters** | Physical connector adapters |
-| **Accessories** | Misc accessories |
+| Category        | Description                   |
+| --------------- | ----------------------------- |
+| **Mounts**      | ECU mounting brackets         |
+| **Enclosures**  | ECU cases and housings        |
+| **Brackets**    | Sensor and component brackets |
+| **Adapters**    | Physical connector adapters   |
+| **Accessories** | Misc accessories              |
 
 ### Available Models
 
-| Model | Category | Material | Print Time |
-|-------|----------|----------|------------|
-| [speeduino-v04-mount](models/mounts/speeduino-v04-mount/) | Mounts | PETG | 3.5 hrs |
+| Model                                                     | Category | Material | Print Time |
+| --------------------------------------------------------- | -------- | -------- | ---------- |
+| [speeduino-v04-mount](models/mounts/speeduino-v04-mount/) | Mounts   | PETG     | 3.5 hrs    |
 
 **Want to contribute?** See [CONTRIBUTING.md](CONTRIBUTING.md)
 
@@ -119,13 +121,13 @@ Printable hardware designs for ECU-related accessories with full print settings 
 
 Full documentation is available at **[openecualliance.org/docs](https://www.openecualliance.org/docs)**
 
-| Topic | Link |
-|-------|------|
-| Getting Started | [/docs/getting-started](https://www.openecualliance.org/docs/getting-started) |
-| Full Specification | [/spec](https://www.openecualliance.org/spec) |
-| Creating Adapters | [/docs/creating-adapters](https://www.openecualliance.org/docs/creating-adapters) |
+| Topic              | Link                                                                                |
+| ------------------ | ----------------------------------------------------------------------------------- |
+| Getting Started    | [/docs/getting-started](https://www.openecualliance.org/docs/getting-started)       |
+| Full Specification | [/spec](https://www.openecualliance.org/spec)                                       |
+| Creating Adapters  | [/docs/creating-adapters](https://www.openecualliance.org/docs/creating-adapters)   |
 | Creating Protocols | [/docs/creating-protocols](https://www.openecualliance.org/docs/creating-protocols) |
-| Creating Models | [/docs/creating-models](https://www.openecualliance.org/docs/creating-models) |
+| Creating Models    | [/docs/creating-models](https://www.openecualliance.org/docs/creating-models)       |
 
 ---
 
@@ -153,9 +155,9 @@ ajv validate -s schema/model.schema.json -d "models/**/*.model.yaml"
 
 Applications that support OpenECU Alliance content:
 
-| Application | Adapters | Protocols | Models |
-|-------------|----------|-----------|--------|
-| [UltraLog](https://github.com/ClassicMiniDIY/UltraLog) | Yes | - | - |
+| Application                                            | Adapters | Protocols | Models |
+| ------------------------------------------------------ | -------- | --------- | ------ |
+| [UltraLog](https://github.com/ClassicMiniDIY/UltraLog) | Yes      | -         | -      |
 
 **Building an app?** Visit [openecualliance.org/ecosystem](https://www.openecualliance.org/ecosystem)
 

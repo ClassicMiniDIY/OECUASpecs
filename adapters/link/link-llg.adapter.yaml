@@ -18,7 +18,6 @@ description: |
   - Data stored as f32 (value, time) pairs
   - Time values in seconds
 website: "https://www.linkecu.com"
-
 branding:
   logo: link-logo.svg
   icon: link-icon.svg
@@ -30,7 +29,7 @@ file_format:
   type: binary
   extensions: [".llg", ".llgx"]
   endianness: little
-  magic_bytes: [0x6C, 0x66, 0x33]  # "lf3" at offset 4
+  magic_bytes: [0x6C, 0x66, 0x33] # "lf3" at offset 4
   specification_url: "https://www.linkecu.com"
 
 channels:
