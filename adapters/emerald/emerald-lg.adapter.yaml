@@ -131,7 +131,7 @@ channels:
     max: 1
     precision: 2
     source_names:
-      - "Lambda Sensor"
+      - "Lambda Sensor Voltage"
     internal_id: 1
 
   - id: afr
