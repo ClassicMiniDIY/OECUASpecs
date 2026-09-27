@@ -1,7 +1,7 @@
 openecualliance: "1.0"
 id: emerald-lg
 name: "Emerald K6/M3D ECU Log"
-version: "1.0.0"
+version: "1.1.0"
 vendor: emerald
 description: |
   Parses binary log files from Emerald K6 and M3D ECUs.
@@ -34,6 +34,11 @@ file_format:
     Requires both .lg1 (data) and .lg2 (channel definitions) files.
     LG1 records are 24 bytes: 8-byte f64 OLE timestamp + 8 x 2-byte u16 values.
     Channel values are scaled: (raw_value * scale) + offset.
+    internal_id is the channel ID the .lg2 [chanN] section stores. IDs 1, 15, 20, 24,
+    26, 31, 32 and 41 are confirmed against EM Soft labels (UltraLog issue #93); the
+    other IDs are unconfirmed.
+    The second value of the .lg2 [ValU] section is the logger pressure unit:
+    1 = MAP stored in kPa, 2 = MAP stored in mbar.
 
 channels:
   # Core Engine Parameters
@@ -61,11 +66,11 @@ channels:
     precision: 1
     source_names:
       - "TPS"
-    internal_id: 1
+    internal_id: 41
 
   - id: map
     name: "Manifold Pressure"
-    description: "Manifold absolute pressure"
+    description: "Manifold absolute pressure. Stored in kPa or mbar per the .lg2 [ValU] pressure unit"
     category: pressure
     data_type: float
     unit: kpa
@@ -115,6 +120,19 @@ channels:
     source_names:
       - "Lambda"
     internal_id: [4, 47]
+
+  - id: lambda_sensor
+    name: "Lambda Sensor Voltage"
+    description: "ECU lambda input voltage (EM Soft \"AFR/Lambda\"), stored in mV"
+    category: fuel
+    data_type: float
+    unit: volts
+    min: 0
+    max: 1
+    precision: 2
+    source_names:
+      - "Lambda Sensor"
+    internal_id: 1
 
   - id: afr
     name: "Air-Fuel Ratio"
@@ -166,8 +184,20 @@ channels:
     precision: 1
     source_names:
       - "Inj Duty Cycle"
-      - "Inj Duty"
-    internal_id: [23, 31]
+    internal_id: 23
+
+  - id: inj_duration
+    name: "Injector Duration"
+    description: "Injector duration as duty cycle (EM Soft \"Inj Duration\")"
+    category: fuel
+    data_type: float
+    unit: percent
+    min: 0
+    max: 100
+    precision: 1
+    source_names:
+      - "Inj Duration"
+    internal_id: 26
 
   - id: fuel_pressure
     name: "Fuel Pressure"
@@ -180,7 +210,7 @@ channels:
     precision: 2
     source_names:
       - "Fuel Pressure"
-    internal_id: [5, 24]
+    internal_id: 5
 
   - id: fuel_cut
     name: "Fuel Cut"
@@ -195,7 +225,7 @@ channels:
   # Ignition System
   - id: ignition_advance
     name: "Ignition Advance"
-    description: "Spark timing advance"
+    description: "Spark timing advance. ID 24 (EM Soft \"Ign Adv\") is stored as (degrees + 50) x 10; the offset is inferred from log data"
     category: ignition
     data_type: float
     unit: degrees
@@ -205,7 +235,7 @@ channels:
     source_names:
       - "Ignition Advance"
       - "Ignition Timing"
-    internal_id: [21, 29]
+    internal_id: [21, 24, 29]
 
   - id: spark_cut
     name: "Spark Cut"
@@ -324,6 +354,19 @@ channels:
       - "Boost Duty"
     internal_id: 11
 
+  - id: boost_pwm
+    name: "Boost PWM"
+    description: "Boost control solenoid PWM output (EM Soft \"BoostPWM\")"
+    category: pressure
+    data_type: float
+    unit: percent
+    min: 0
+    max: 100
+    precision: 1
+    source_names:
+      - "Boost PWM"
+    internal_id: 15
+
   # Electrical
   - id: battery_voltage
     name: "Battery Voltage"
@@ -363,7 +406,6 @@ channels:
     precision: 0
     source_names:
       - "Gear"
-    internal_id: 15
 
   # Fuel Corrections
   - id: clt_correction
@@ -390,7 +432,6 @@ channels:
     precision: 1
     source_names:
       - "Air Temp Corr"
-    internal_id: 26
 
   - id: accel_enrichment
     name: "Acceleration Enrichment"
@@ -417,6 +458,20 @@ channels:
     source_names:
       - "Warmup Enrich"
     internal_id: 28
+
+  # Map Position
+  - id: load_site
+    name: "Load Site"
+    description: "Fuel/ignition map load row index (EM Soft \"Load site\")"
+    category: engine
+    data_type: int
+    unit: ""
+    min: 0
+    max: 15
+    precision: 0
+    source_names:
+      - "Load Site"
+    internal_id: 31
 
   # Idle Control
   - id: idle_valve
@@ -463,7 +518,14 @@ metadata:
     - "Requires both .lg1 and .lg2 files with same base name"
     - "Limited to 8 channels per log session"
     - "Some channel IDs may vary between firmware versions"
+    - "Only IDs 1, 15, 20, 24, 26, 31, 32 and 41 are confirmed against EM Soft"
   changelog:
+    - version: "1.1.0"
+      date: "2026-09-27"
+      changes:
+        - "Correct channel IDs confirmed against EM Soft (UltraLog issue #93): TPS is 41, ID 1 is the lambda input voltage, 24 is Ign Adv, 26 is Inj Duration (%), 15 is Boost PWM, 31 is Load Site"
+        - "Remove the unconfirmed Gear and Air Temp Correction IDs that those IDs replace"
+        - "Document the .lg2 [ValU] pressure unit that sets MAP scaling"
     - version: "1.0.0"
       date: "2025-01-05"
       changes:
