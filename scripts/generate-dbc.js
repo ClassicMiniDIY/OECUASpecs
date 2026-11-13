@@ -18,6 +18,14 @@ const path = require("path");
 const yaml = require("yaml");
 
 /**
+ * Quote a free-text value for a DBC comment string. Backslashes are escaped
+ * first, so a description that ends in `\` cannot escape the closing quote.
+ */
+function dbcString(text) {
+  return text.replace(/\\/g, "\\\\").replace(/"/g, '\\"').replace(/\r?\n/g, " ");
+}
+
+/**
  * Parse a message ID that can be either a number or hex string
  */
 function parseMessageId(id) {
@@ -101,7 +109,7 @@ function generateDBC(protocol) {
     const msgId = parseMessageId(msg.id);
     if (msg.description) {
       lines.push(
-        `CM_ BO_ ${msgId} "${msg.description.replace(/"/g, '\\"').replace(/\n/g, " ")}";`,
+        `CM_ BO_ ${msgId} "${dbcString(msg.description)}";`,
       );
     }
   }
@@ -112,7 +120,7 @@ function generateDBC(protocol) {
     for (const signal of msg.signals || []) {
       if (signal.description) {
         lines.push(
-          `CM_ SG_ ${msgId} ${signal.name.replace(/\s+/g, "_")} "${signal.description.replace(/"/g, '\\"').replace(/\n/g, " ")}";`,
+          `CM_ SG_ ${msgId} ${signal.name.replace(/\s+/g, "_")} "${dbcString(signal.description)}";`,
         );
       }
     }
